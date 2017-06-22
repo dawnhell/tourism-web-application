@@ -9,7 +9,7 @@ import { MapComponent           } from './home-page/map/map.component';
 import { PreviewStripComponent  } from './home-page/preview-strip/preview-strip.component';
 import { PlaceComponent         } from './home-page/preview-strip/place/place.component';
 import { PageNotFoundComponent  } from './page-not-found/page-not-found.component';
-import { APP_ROUTES             } from './app.routes';
+import { AppRoutingModule       } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { APP_ROUTES             } from './app.routes';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(APP_ROUTES)
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
