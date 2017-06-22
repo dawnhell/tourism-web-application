@@ -1,7 +1,6 @@
 {
-  "name": "angular2-test",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "tourism-web-application",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
