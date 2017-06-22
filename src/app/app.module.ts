@@ -3,27 +3,23 @@ import { NgModule               } from '@angular/core';
 import { RouterModule           } from '@angular/router';
 
 import { AppComponent           } from './app.component';
-import { HomePageComponent      } from './home-page/home-page.component';
-import { FavoritesPageComponent } from './favorites-page/favorites-page.component';
-import { MapComponent           } from './home-page/map/map.component';
-import { PreviewStripComponent  } from './home-page/preview-strip/preview-strip.component';
-import { PlaceComponent         } from './home-page/preview-strip/place/place.component';
-import { PageNotFoundComponent  } from './page-not-found/page-not-found.component';
 import { AppRoutingModule       } from './app-routing.module';
+import { HomePageModule         } from './home-page/home-page.module';
+import { FavoritesPageModule    } from './favorites-page/favorites-page.module';
+import { PageNotFoundModule     } from './page-not-found/page-not-found.module';
+import { NavbarComponent        } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomePageComponent,
-    FavoritesPageComponent,
-    MapComponent,
-    PreviewStripComponent,
-    PlaceComponent,
-    PageNotFoundComponent
+      AppComponent,
+      NavbarComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+      BrowserModule,
+      AppRoutingModule,
+      FavoritesPageModule,
+      HomePageModule,
+      PageNotFoundModule
   ],
   providers: [],
   bootstrap: [AppComponent]
