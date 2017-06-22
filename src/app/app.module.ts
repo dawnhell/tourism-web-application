@@ -5,9 +5,9 @@ import { RouterModule           } from '@angular/router';
 import { AppComponent           } from './app.component';
 import { HomePageComponent      } from './home-page/home-page.component';
 import { FavoritesPageComponent } from './favorites-page/favorites-page.component';
-import { MapComponent           } from './map/map.component';
-import { PreviewStripComponent  } from './preview-strip/preview-strip.component';
-import { PlaceComponent         } from './place/place.component';
+import { MapComponent           } from './home-page/map/map.component';
+import { PreviewStripComponent  } from './home-page/preview-strip/preview-strip.component';
+import { PlaceComponent         } from './home-page/preview-strip/place/place.component';
 import { PageNotFoundComponent  } from './page-not-found/page-not-found.component';
 import { APP_ROUTES             } from './app.routes';
 
