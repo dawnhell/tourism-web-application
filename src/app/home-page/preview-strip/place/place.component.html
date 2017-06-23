@@ -1,3 +1,15 @@
-<p>
-  place works!
-</p>
+<div class="card" style="max-width: 140px;">
+  <img class="card-img-top" src="{{photo}}" alt="Photo of sunset">
+  <!-- Text Content -->
+  <div class="card-block">
+    <h5 class="name">{{name}}</h5>
+    <h6>
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      {{city}}
+    </h6>
+    <p class="card-text">{{shortDescription}}...</p>
+    <div class="favourites">
+      {{favourites}} <i class="fa fa-heart" aria-hidden="true" (click)="onFavourite()"></i>
+    </div>
+  </div>
+</div>
