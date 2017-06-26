@@ -9,7 +9,7 @@ export class HomePageComponent {
 
   isSidebarToggled: boolean;
 
-  toggleSidebar(){
+  toggleSidebar() {
     this.isSidebarToggled = !this.isSidebarToggled;
   }
 }

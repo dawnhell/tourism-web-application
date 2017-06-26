@@ -11,5 +11,4 @@ export class PreviewStripComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
