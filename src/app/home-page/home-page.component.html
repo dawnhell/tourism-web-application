@@ -1,22 +1,2 @@
-<div id="home-page-wrapper" [class.toggled]="isSidebarToggled">
-
-    <div id="sidebar-wrapper">
-        <div class="sidebar-nav">
-            <app-preview-strip></app-preview-strip>
-        </div>
-    </div>
-
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <app-map></app-map>
-                    <button class="btn btn-default" (click)="toggleSidebar()">
-                      Toggle Side
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+<app-preview-strip></app-preview-strip>
+<app-map></app-map>
