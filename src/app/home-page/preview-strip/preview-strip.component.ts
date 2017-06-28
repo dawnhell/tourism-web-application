@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PLACES } from './strip-mock-data';
+import { Place } from './place/place.model';
 
 @Component({
   selector: 'app-preview-strip',
@@ -7,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreviewStripComponent implements OnInit {
 
-  constructor() { }
+    places: Place[] =  PLACES;
 
-  ngOnInit() {
-  }
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
 }

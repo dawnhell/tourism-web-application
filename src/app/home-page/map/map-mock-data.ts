@@ -1,4 +1,4 @@
-import {Flag} from './flag';
+import { Flag } from './flag';
 
 export const FLAGS: Flag[] = [
     {
