@@ -1,15 +1,17 @@
-<nav class="navbar sticky-top navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right"
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+  <button class="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <a class="navbar-brand" routerLink="/home">Tourism Platform</a>
+
   <div class="collapse navbar-collapse" id="navbarNav">
     <form class="form-inline mx-auto">
       <div class="form-group">
@@ -31,22 +33,47 @@
     </form>
 
     <div class="btn-group mr-0" role="group">
-      <a routerLink="/favorites" class="btn btn-secondary">
+      <a routerLink="/favorites" class="btn btn-light">
         <i class="fa fa-star" aria-hidden="true"></i>
       </a>
-      <a class="btn btn-secondary">
+
+      <a class="btn btn-light">
         <i class="fa fa-plane" aria-hidden="true"></i>
       </a>
+
       <div class="btn-group">
         <button type="button"
-                class="btn btn-secondary dropdown-toggle"
+                class="btn btn-light dropdown-toggle"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false">
           <i class="fa fa-user" aria-hidden="true"></i>
         </button>
 
-        <div *ngIf="isAuthenticated" class="dropdown-menu user-dropdown-menu">
+        <div class="dropdown-menu dropdown-menu-right">
+          <form class="px-4 py-3">
+            <div class="form-group">
+              <label for="exampleDropdownFormEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="exampleDropdownFormPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input">
+                Remember me
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">New around here? Sign up</a>
+          <a class="dropdown-item" href="#">Forgot password?</a>
+        </div>
+
+        <!--<div *ngIf="isAuthenticated" class="dropdown-menu user-dropdown-menu">
           <a class="dropdown-item">Profile</a>
           <a class="dropdown-item">Settings</a>
           <div class="dropdown-divider"></div>
@@ -55,7 +82,7 @@
 
         <div *ngIf="!isAuthenticated" class="dropdown-menu user-dropdown-menu">
           <a class="dropdown-item" (click)="onLogin()">Log in</a>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>

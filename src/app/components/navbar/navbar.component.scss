@@ -1,10 +1,24 @@
-.user-dropdown-menu {
-  //left: 100%;
-  float: right;
-  right: 0;
-  left: -100px;
-}
+//.user-dropdown-menu {
+//  //left: 100%;
+//  float: right;
+//  right: 0;
+//  left: -100px;
+//}
+//
+//.dropdown-item:hover {
+//  cursor: pointer;
+//}
 
-.dropdown-item:hover {
-  cursor: pointer;
+.navbar {
+
+  .navbar-collapse {
+
+    .city-select-label {
+      color: #fff;
+    }
+
+    .city-select {
+      margin: 0 10px;
+    }
+  }
 }

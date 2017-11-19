@@ -7,7 +7,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
     imports: [
         CommonModule,
-        InfiniteScrollModule,
+        InfiniteScrollModule
     ],
     declarations: [
         SightsListComponent,
