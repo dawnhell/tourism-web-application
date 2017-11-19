@@ -1,12 +1,17 @@
-import { BrowserModule          } from '@angular/platform-browser';
-import { NgModule               } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppComponent           } from './app.component';
-import { AppRoutingModule       } from './app-routing.module';
-import { HomePageModule         } from './home-page/home-page.module';
-import { FavoritesPageModule    } from './favorites-page/favorites-page.module';
-import { PageNotFoundModule     } from './page-not-found/page-not-found.module';
-import { NavbarComponent        } from './navbar/navbar.component';
+import { AppComponent } from './app.component';
+import { FavoritesModule } from './pages/favorites/favorites.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeModule } from './pages/home/home.module';
+import { MediaModule } from './pages/media/media.module';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
+import { MapService } from './services/map.service';
+import { ApiModule } from './services/swagger/api.module';
+import { SightsListModule } from './modules/sights-list/sights-list.module';
+import { AppRouteReuseStrategy } from './app.route-reuse-strategy';
+import { SightService } from './services/swagger/api/sight.service';
 
 @NgModule({
   declarations: [
@@ -15,12 +20,27 @@ import { NavbarComponent        } from './navbar/navbar.component';
   ],
   imports: [
       BrowserModule,
-      AppRoutingModule,
-      FavoritesPageModule,
-      HomePageModule,
-      PageNotFoundModule
+      SightsListModule,
+      FavoritesModule,
+      HomeModule,
+      MediaModule,
+      ApiModule,
+      RouterModule.forRoot([
+          {
+              path: '**',
+              pathMatch: 'full',
+              redirectTo: 'home'
+          }
+      ])
   ],
-  providers: [],
+  providers: [
+      MapService,
+      SightService,
+      {
+          provide: RouteReuseStrategy,
+          useClass: AppRouteReuseStrategy
+      }
+  ],
   bootstrap: [AppComponent]
 })
 

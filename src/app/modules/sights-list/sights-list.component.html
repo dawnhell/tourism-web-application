@@ -1,0 +1,16 @@
+<div class='container sights-list'
+     infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="50"
+     [scrollWindow]="false"
+     (scrolled)="onScroll()">
+    <div class='row' *ngIf='flags?.length'>
+        <div class='col-6' *ngFor='let flag of flags'>
+            <app-sights-item [sight]='flag' (navigate)="onNavigate($event)"></app-sights-item>
+        </div>
+    </div>
+
+    <div class='row' *ngIf='!flags?.length'>
+      <p class='text-info h3 text-center pt-3'>No events in current area. Search event in other places.</p>
+    </div>
+</div>
