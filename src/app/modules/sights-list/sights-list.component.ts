@@ -11,12 +11,20 @@ import { Router } from '@angular/router';
 
 export class SightsListComponent {
   @Input() flags: Flag[];
+  @Output() setFlag = new EventEmitter();
   @Output() scroll = new EventEmitter();
+
   constructor(private router: Router) { };
+
   onNavigate(sight: Flag) {
       this.router.navigate(['sight', sight.id]);
   }
+
   onScroll() {
     this.scroll.emit();
+  }
+
+  onSetFlag(flag: Flag) {
+    this.setFlag.emit(flag);
   }
 }

@@ -10,8 +10,31 @@ import { Flag } from '../../../models/flag';
 export class SightsItemComponent {
   @Input() sight: Flag;
   @Output() navigate = new EventEmitter();
-  constructor() { }
+  @Output() setFlag = new EventEmitter();
+
+  private isFavourite: boolean = false;
+
+  constructor() {
+    this.isFavourite = false;
+  }
+
   onNavigate() {
     this.navigate.emit(this.sight);
+  }
+
+  onSetFlag() {
+    if (this.isFavourite) {
+        --this.sight.popularity;
+        this.isFavourite = false;
+    } else {
+        ++this.sight.popularity;
+        this.isFavourite = true;
+    }
+
+    this.setFlag.emit(this.sight);
+  }
+
+  onLikeClick() {
+
   }
 }

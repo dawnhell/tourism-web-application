@@ -38,6 +38,16 @@ export class MapService {
             (flag.longitude > this.southWest.lng && flag.longitude < this.northEast.lng)
         ).slice(page * LIMIT, (page + 1) * LIMIT)
     }
+
+    setSight(flag: Flag) {
+        for (let i = 0; i < FLAGS.length; ++i) {
+            if (flag.id === FLAGS[i].id) {
+                FLAGS[i] = flag;
+                break;
+            }
+        }
+    }
+
     loadMoreSights(page: number) {
         this.update.next(this.getSights(page));
     }
@@ -45,13 +55,16 @@ export class MapService {
     getCityCoordinates(): Observable<any> {
         return this.coordinates.asObservable();
     }
+
     getAllSigts() {
         return this.all.asObservable();
     }
+
     sightsInit() {
         /* Imitating getting sights from server. */
         return this.init.asObservable();
     }
+
     sightsUpdater() {
         return this.update.asObservable();
     }

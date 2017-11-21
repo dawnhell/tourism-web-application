@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-            <app-sights-list [flags]="flags" (scroll)="onScroll()"></app-sights-list>
+            <app-sights-list [flags]="flags" (scroll)="onScroll()" (setFlag)="setFlag($event)"></app-sights-list>
         </div>
         <div class="col-8">
             <router-outlet></router-outlet>

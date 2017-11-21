@@ -27,4 +27,18 @@
     cursor: pointer;
     margin: 10px;
   }
+
+  .favourites {
+    i {
+      cursor: pointer;
+
+      &:hover {
+        color: #F44336;
+      }
+
+      &.active {
+        color: #F44336;
+      }
+    }
+  }
 }

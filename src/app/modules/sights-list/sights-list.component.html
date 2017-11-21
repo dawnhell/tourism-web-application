@@ -6,7 +6,7 @@
      (scrolled)="onScroll()">
     <div class='row' *ngIf='flags?.length'>
         <div class='col-6' *ngFor='let flag of flags'>
-            <app-sights-item [sight]='flag' (navigate)="onNavigate($event)"></app-sights-item>
+            <app-sights-item [sight]='flag' (navigate)="onNavigate($event)" (setFlag)="onSetFlag($event)"></app-sights-item>
         </div>
     </div>
 

@@ -28,7 +28,6 @@ export class AppComponent implements OnInit{
         this._mapService.sightsUpdater()
             .subscribe(
                 data => {
-                    console.log('update');
                     if (data.length) {
                         this.flags = this.flags.concat(data);
                     } else {
@@ -40,10 +39,15 @@ export class AppComponent implements OnInit{
                 }
             );
     }
+
     onScroll() {
         if (!this.isEndOfList) {
             this._mapService.loadMoreSights(this.currentPage);
             this.currentPage++;
         }
+    }
+
+    setFlag(flag: Flag) {
+        this._mapService.setSight(flag);
     }
 }
