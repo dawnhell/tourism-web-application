@@ -11,21 +11,10 @@ export class FavoritesComponent implements OnInit {
   list: Flag[] = [];
   page: number = 1;
   isEndOfList: boolean;
-  constructor(private _mapService: MapService,
-              private zone: NgZone) { }
+  constructor(private _mapService: MapService) { }
 
   ngOnInit() {
     this.list = this._mapService.getFavorites();
-    this._mapService.favouritesUpdater().subscribe(sight => {
-        this.zone.run(() => {
-            const index = this.list.findIndex(el => el.id === sight.id);
-            if (index > -1) {
-                this.list[index] = sight;
-            } else {
-                this.list.push(sight);
-            }
-        })
-    })
   }
   getFavorites() {
     if (!this.isEndOfList) {

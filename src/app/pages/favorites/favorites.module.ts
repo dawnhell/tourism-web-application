@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './favorites.component';
 import { RouterModule } from '@angular/router';
-import { SightsListModule } from '../../modules/sights-list/sights-list.module';
+import { FaveListComponent } from './fave-list/fave-list.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FaveItemComponent } from './fave-item/fave-item.component';
 
 
 @NgModule({
     imports: [
         CommonModule,
-        SightsListModule,
+        InfiniteScrollModule,
         RouterModule.forRoot([
             {
                 path: 'favorites',
@@ -18,6 +20,8 @@ import { SightsListModule } from '../../modules/sights-list/sights-list.module';
     ],
     declarations: [
         FavoritesComponent,
+        FaveListComponent,
+        FaveItemComponent,
     ]
 })
 export class FavoritesModule { }

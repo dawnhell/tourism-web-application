@@ -1,0 +1,19 @@
+<div class='container sights-list'
+     infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="50"
+     [scrollWindow]="false"
+     (scrolled)="onScroll()">
+  <div *ngIf='flags?.length && groups'>
+    <div class='row' *ngFor="let group of groups">
+      <h5 class="col-12">{{group[0].getDate() + ' ' + monthNames[group[0].getMonth()] + ' ' + group[0].getFullYear()}}</h5>
+      <div class='col-lg-6 col-xl-4' *ngFor='let flag of group[1]'>
+        <app-fave-item [sight]='flag' (navigate)="onNavigate($event)" (setFlag)="onSetFlag($event)"></app-fave-item>
+      </div>
+    </div>
+  </div>
+
+  <div class='row' style="display: flex; justify-content: center" *ngIf='!flags?.length'>
+    <p class='text-info h3 text-center pt-3'>No Favorites</p>
+  </div>
+</div>

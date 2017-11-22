@@ -21,9 +21,11 @@ export class SightsItemComponent {
   onSetFlag() {
     if (this.sight.isFavourite) {
         --this.sight.popularity;
+        this.sight.favedAt = null;
         this.sight.isFavourite = false;
     } else {
         ++this.sight.popularity;
+        this.sight.favedAt = new Date();
         this.sight.isFavourite = true;
     }
 
