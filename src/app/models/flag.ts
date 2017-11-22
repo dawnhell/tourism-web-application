@@ -6,4 +6,5 @@ export class Flag {
     address: string;
     latitude: number;
     longitude: number;
+    isFavourite: boolean
 }

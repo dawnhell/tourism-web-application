@@ -12,23 +12,19 @@ export class SightsItemComponent {
   @Output() navigate = new EventEmitter();
   @Output() setFlag = new EventEmitter();
 
-  private isFavourite: boolean = false;
-
-  constructor() {
-    this.isFavourite = false;
-  }
+  constructor() { }
 
   onNavigate() {
     this.navigate.emit(this.sight);
   }
 
   onSetFlag() {
-    if (this.isFavourite) {
+    if (this.sight.isFavourite) {
         --this.sight.popularity;
-        this.isFavourite = false;
+        this.sight.isFavourite = false;
     } else {
         ++this.sight.popularity;
-        this.isFavourite = true;
+        this.sight.isFavourite = true;
     }
 
     this.setFlag.emit(this.sight);

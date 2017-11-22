@@ -2,7 +2,7 @@
 
 import { Flag } from '../models/flag';
 
-export const FLAGS: Flag[] = [
+export const FLAGS = [
     {
         id: '59b3dffd554bf09345bf0ae5',
         picture: 'http://placehold.it/128x128',
@@ -1803,4 +1803,4 @@ export const FLAGS: Flag[] = [
         latitude: 53.62,
         longitude: 29.31
     }
-];
+] as Flag[];

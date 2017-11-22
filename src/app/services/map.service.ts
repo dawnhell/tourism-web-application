@@ -13,6 +13,7 @@ export class MapService {
     private all = new Subject<Flag[]>();
     private init = new Subject<Flag[]>();
     private update = new Subject<Flag[]>();
+    private favourite = new Subject<Flag>();
     private southWest;
     private northEast;
 
@@ -39,13 +40,13 @@ export class MapService {
         ).slice(page * LIMIT, (page + 1) * LIMIT)
     }
 
+    getFavorites(page: number = 0) {
+        return FLAGS.filter(flag => flag.isFavourite).slice(page * LIMIT, (page + 1) * LIMIT)
+    }
+
     setSight(flag: Flag) {
-        for (let i = 0; i < FLAGS.length; ++i) {
-            if (flag.id === FLAGS[i].id) {
-                FLAGS[i] = flag;
-                break;
-            }
-        }
+        FLAGS[FLAGS.findIndex(el => el.id === flag.id)] = flag;
+        this.favourite.next(flag);
     }
 
     loadMoreSights(page: number) {
@@ -67,5 +68,9 @@ export class MapService {
 
     sightsUpdater() {
         return this.update.asObservable();
+    }
+
+    favouritesUpdater() {
+        return this.favourite.asObservable();
     }
 }
