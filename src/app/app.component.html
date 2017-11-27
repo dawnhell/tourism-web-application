@@ -3,10 +3,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 col-lg-5">
+            <div *ngIf="isAddBtnVisible">
+                <button (click)="addEventToRoute()" class="btn btn-primary m-3 btn-block">Add event to route</button>
+            </div>
             <app-sights-list [flags]="flags" (scroll)="onScroll()" (setFlag)="setFlag($event)"></app-sights-list>
         </div>
         <div class="col-md-8 col-lg-7">
-            <router-outlet></router-outlet>
+            <router-outlet (showAddBtn)="showAddBtn($event)"></router-outlet>
         </div>
     </div>
 </div>

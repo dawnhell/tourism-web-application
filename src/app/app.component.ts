@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Flag } from './models/flag';
 import { MapService } from './services/map.service';
+import {HelperService} from './services/helper.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,19 @@ export class AppComponent implements OnInit{
     flags: Flag[] = [];
     currentPage: number = 1;
     isEndOfList: boolean;
-    constructor(private _mapService: MapService) { }
+    isAddBtnVisible: boolean = false;
+
+    constructor(private _mapService: MapService,
+                private _helperService: HelperService) {
+        this._helperService.isAbbBtnVisible$.subscribe(
+            data => {
+                this.isAddBtnVisible = data;
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }
 
     ngOnInit() {
         this._mapService.sightsInit()
@@ -49,5 +62,13 @@ export class AppComponent implements OnInit{
 
     setFlag(flag: Flag) {
         this._mapService.setSight(flag);
+    }
+
+    showAddBtn(flag: Flag) {
+        console.log(flag);
+    }
+
+    addEventToRoute() {
+        
     }
 }

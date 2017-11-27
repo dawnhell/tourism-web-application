@@ -12,6 +12,8 @@ import { ApiModule } from './services/swagger/api.module';
 import { SightsListModule } from './modules/sights-list/sights-list.module';
 import { AppRouteReuseStrategy } from './app.route-reuse-strategy';
 import { SightService } from './services/swagger/api/sight.service';
+import {RouteModule} from './pages/route/route.module';
+import {HelperService} from './services/helper.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { SightService } from './services/swagger/api/sight.service';
       HomeModule,
       MediaModule,
       ApiModule,
+      RouteModule,
       RouterModule.forRoot([
           {
               path: '**',
@@ -35,6 +38,7 @@ import { SightService } from './services/swagger/api/sight.service';
   ],
   providers: [
       MapService,
+      HelperService,
       SightService,
       {
           provide: RouteReuseStrategy,

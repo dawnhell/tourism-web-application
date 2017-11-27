@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Flag } from '../../../models/flag';
 import * as L from 'leaflet';
 import { MapService } from '../../../services/map.service';
+import {HelperService} from '../../../services/helper.service';
 
 @Component({
   selector: 'app-map',
@@ -10,10 +11,14 @@ import { MapService } from '../../../services/map.service';
 })
 
 export class MapComponent implements OnInit {
+    @Output() showAddBtn = new EventEmitter();
+
     private mymap: any;
     private flags: Flag[];
+    public prevActive: number = 0;
 
-    constructor(private _mapService: MapService) { }
+    constructor(private _mapService: MapService,
+                private _helperService: HelperService) { }
 
     ngOnInit() {
         this.createAndDrawDefaultMap();
@@ -65,8 +70,19 @@ export class MapComponent implements OnInit {
                 iconUrl: '../../../assets/map-marker.png'
             });
 
+            const self = this;
+
             const marker = L.marker([this.flags[i].latitude, this.flags[i].longitude], { icon: icon })
-                .addTo(this.mymap);
+                .addTo(this.mymap)
+                .on('click', function () {
+                    if (self.prevActive !== i) {
+                        self.prevActive = i;
+                        self._helperService.toggleAbbBtn(true);
+                        self._helperService.selectEvent(self.flags[i]);
+                    } else {
+                        self._helperService.toggleAbbBtn(false);
+                    }
+                });
 
             /* This is HTML markup for marker popup. */
             marker.bindPopup(`
