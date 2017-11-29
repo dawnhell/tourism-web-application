@@ -39,6 +39,9 @@ export class MapComponent implements OnInit {
             const lines = this.route.slice() as any[];
             this.polyline.setLatLngs(lines.map(item => item = L.latLng(item.latitude, item.longitude)));
             this.polyline.redraw();
+            if (this.route.length > 1) {
+                this.mymap.fitBounds(this.polyline.getBounds());
+            }
         });
 
         this._mapService.removeSight().subscribe(sight => {
@@ -47,6 +50,9 @@ export class MapComponent implements OnInit {
             const lines = this.route.slice() as any[];
             this.polyline.setLatLngs(lines.map(item => item = L.latLng(item.latitude, item.longitude)));
             this.polyline.redraw();
+            if (this.route.length > 1) {
+                this.mymap.fitBounds(this.polyline.getBounds());
+            }
         });
 
         // const latlngs = [
@@ -55,8 +61,6 @@ export class MapComponent implements OnInit {
         //     [34.04, -118.2]
         // ] as LatLngExpression[];
         this.polyline = L.polyline([], {color: 'red'}).addTo(this.mymap);
-
-        // this.mymap.fitBounds(this.polyline.getBounds());
     }
 
     createAndDrawDefaultMap() {
