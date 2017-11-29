@@ -1,6 +1,8 @@
 .sights-list {
-  height: 90vh;
-  overflow: auto;
+
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 20px;
 
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);

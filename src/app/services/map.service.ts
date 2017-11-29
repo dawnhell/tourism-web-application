@@ -73,4 +73,8 @@ export class MapService {
     favouritesUpdater() {
         return this.favourite.asObservable();
     }
+
+    selectSight(sight: Flag) {
+        this.init.next([sight]);
+    }
 }

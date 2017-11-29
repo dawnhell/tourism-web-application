@@ -1,12 +1,14 @@
-<app-navbar></app-navbar>
+<div class="wrap">
+    <app-navbar></app-navbar>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4 col-lg-5">
-            <router-outlet></router-outlet>
-        </div>
-        <div class="col-md-8 col-lg-7">
-            <app-map></app-map>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="content col-md-4 col-lg-5">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="col-md-8 col-lg-7">
+                <app-map ></app-map>
+            </div>
         </div>
     </div>
 </div>

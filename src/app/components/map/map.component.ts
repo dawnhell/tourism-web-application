@@ -2,7 +2,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as L from 'leaflet';
 import { Flag } from '../../models/flag';
 import { MapService } from '../../services/map.service';
-import { HelperService } from '../../services/helper.service';
 
 @Component({
   selector: 'app-map',
@@ -12,13 +11,11 @@ import { HelperService } from '../../services/helper.service';
 
 export class MapComponent implements OnInit {
     @Output() showAddBtn = new EventEmitter();
-
     private mymap: any;
     private flags: Flag[];
-    public prevActive: number = 0;
+    isPopupSelected: boolean;
 
-    constructor(private _mapService: MapService,
-                private _helperService: HelperService) { }
+    constructor(private _mapService: MapService) { }
 
     ngOnInit() {
         this.createAndDrawDefaultMap();
@@ -70,27 +67,20 @@ export class MapComponent implements OnInit {
                 iconUrl: '../../../assets/map-marker.png'
             });
 
-            const self = this;
-
             const marker = L.marker([this.flags[i].latitude, this.flags[i].longitude], { icon: icon })
                 .addTo(this.mymap)
-                .on('click', function () {
-                    if (self.prevActive !== i) {
-                        self.prevActive = i;
-                        self._helperService.toggleAbbBtn(true);
-                        self._helperService.selectEvent(self.flags[i]);
-                    } else {
-                        self._helperService.toggleAbbBtn(false);
-                    }
+                .on('click', () => {
+                    this._mapService.selectSight(this.flags[i]);
+                    this.isPopupSelected = true;
                 });
 
             /* This is HTML markup for marker popup. */
             marker.bindPopup(`
                 <strong>` + this.flags[i].name + `</strong>
                 <br>
-                <span>Popularity: ` + this.flags[i].popularity + `</span>
+                <span>` + this.flags[i].address + `</span>
                 <br>
-                <a href="#">More...</a>
+                <span>Popularity: ` + this.flags[i].popularity + `</span>
             `);
         }
     }
@@ -107,6 +97,12 @@ export class MapComponent implements OnInit {
                     console.log(error);
                 }
             );
+    }
+
+    reinitList() {
+        if (this.isPopupSelected) {
+            this._mapService.setBounds(this.mymap.getBounds()._southWest, this.mymap.getBounds()._northEast);
+        }
     }
 
     bindCityChangeToMap() {

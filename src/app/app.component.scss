@@ -8,6 +8,20 @@
 //  cursor: pointer;
 //}
 
+.wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-fluid {
+  height: calc(100% - 55.6px);
+  position: relative !important;
+  .row {
+    height: 100%;
+  }
+}
+
 .city-select-label {
   padding-right: 10px;
 }
