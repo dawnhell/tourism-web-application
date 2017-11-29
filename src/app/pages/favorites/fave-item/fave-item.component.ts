@@ -2,19 +2,25 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Flag } from '../../../models/flag';
 
 @Component({
-  selector: 'app-fave-item',
-  templateUrl: './fave-item.component.html',
-  styleUrls: ['./fave-item.component.scss']
+    selector: 'app-fave-item',
+    templateUrl: './fave-item.component.html',
+    styleUrls: ['./fave-item.component.scss']
 })
 export class FaveItemComponent {
     @Input() sight: Flag;
-    @Output() navigate = new EventEmitter();
+    @Output() showModal = new EventEmitter();
     @Output() setFlag = new EventEmitter();
 
     constructor() { }
 
-    onNavigate() {
-        this.navigate.emit(this.sight);
+    onCardClick(event) {
+        if ([].includes.call(event.target.classList, 'btn')) {
+            // add to route
+        } else if ([].includes.call(event.target.classList, 'fa-heart')) {
+            this.onSetFlag();
+        } else {
+            this.showModal.emit(this.sight);
+        }
     }
 
     onSetFlag() {
@@ -29,9 +35,5 @@ export class FaveItemComponent {
         }
 
         this.setFlag.emit(this.sight);
-    }
-
-    onLikeClick() {
-
     }
 }

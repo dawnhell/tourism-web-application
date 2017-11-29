@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Flag } from '../../models/flag';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sights-list',
@@ -11,13 +10,14 @@ import { Router } from '@angular/router';
 
 export class SightsListComponent {
   @Input() flags: Flag[];
+  @Output() showModal = new EventEmitter();
   @Output() setFlag = new EventEmitter();
   @Output() scroll = new EventEmitter();
 
-  constructor(private router: Router) { };
+  constructor() { };
 
-  onNavigate(sight: Flag) {
-      this.router.navigate(['sight', sight.id]);
+  onShowModal(sight: Flag) {
+      this.showModal.emit(sight);
   }
 
   onScroll() {

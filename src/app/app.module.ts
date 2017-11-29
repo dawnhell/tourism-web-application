@@ -5,27 +5,30 @@ import { AppComponent } from './app.component';
 import { FavoritesModule } from './pages/favorites/favorites.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeModule } from './pages/home/home.module';
-import { MediaModule } from './pages/media/media.module';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { MapService } from './services/map.service';
 import { ApiModule } from './services/swagger/api.module';
 import { SightsListModule } from './modules/sights-list/sights-list.module';
 import { AppRouteReuseStrategy } from './app.route-reuse-strategy';
 import { SightService } from './services/swagger/api/sight.service';
-import {RouteModule} from './pages/route/route.module';
-import {HelperService} from './services/helper.service';
+import { RouteModule } from './pages/route/route.module';
+import { LeafletModule } from '@asymmetrik/angular2-leaflet';
+import { MapComponent } from './components/map/map.component';
+import { HelperService } from './services/helper.service';
+import { ModalService } from './services/modal.service';
 
 @NgModule({
   declarations: [
       AppComponent,
-      NavbarComponent
+      NavbarComponent,
+      MapComponent
   ],
   imports: [
       BrowserModule,
       SightsListModule,
+      LeafletModule,
       FavoritesModule,
       HomeModule,
-      MediaModule,
       ApiModule,
       RouteModule,
       RouterModule.forRoot([
@@ -39,6 +42,7 @@ import {HelperService} from './services/helper.service';
   providers: [
       MapService,
       HelperService,
+      ModalService,
       SightService,
       {
           provide: RouteReuseStrategy,

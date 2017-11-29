@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { Flag } from '../../../models/flag';
 import * as L from 'leaflet';
-import { MapService } from '../../../services/map.service';
-import {HelperService} from '../../../services/helper.service';
+import { Flag } from '../../models/flag';
+import { MapService } from '../../services/map.service';
+import { HelperService } from '../../services/helper.service';
 
 @Component({
   selector: 'app-map',

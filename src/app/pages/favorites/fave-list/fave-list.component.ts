@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, NgZone, OnInit, Output } from '@angular
 import { Flag } from '../../../models/flag';
 import { Router } from '@angular/router';
 import { MapService } from '../../../services/map.service';
+import { ModalService } from '../../../services/modal.service';
 
 const MONTH_NAMES = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
@@ -17,7 +18,7 @@ export class FaveListComponent implements OnInit {
     groups = [];
     monthNames = MONTH_NAMES;
 
-    constructor(private router: Router,
+    constructor(private _modalService: ModalService,
                 private _mapService: MapService,
                 private zone: NgZone) { };
 
@@ -58,8 +59,8 @@ export class FaveListComponent implements OnInit {
         })
     }
 
-    onNavigate(sight: Flag) {
-        this.router.navigate(['sight', sight.id]);
+    onShowModal(sight: Flag) {
+        this._modalService.showModal(sight);
     }
 
     onScroll() {
