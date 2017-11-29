@@ -9,7 +9,10 @@
       {{sight.popularity}} <i [class.active]="sight.isFavourite" class="fa fa-heart" aria-hidden="true"></i> people liked it!
     </div>
   </div>
-  <button class="btn btn-outline-primary">
-    Add to route
+  <button class="btn" [ngClass]="{
+                        'btn-outline-primary': !sight.isAddedToRoute,
+                        'btn-outline-danger': sight.isAddedToRoute
+                        }">
+    {{sight.isAddedToRoute ? 'Remove from route' : 'Add to route'}}
   </button>
 </div>

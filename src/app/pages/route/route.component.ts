@@ -11,15 +11,20 @@ import { ModalService } from '../../services/modal.service';
 
 export class RouteComponent implements OnInit {
     flags: Flag[] = [];
-    currentPage: number = 1;
-    isEndOfList: boolean;
     @Output() showModal = new EventEmitter();
 
     constructor(private _mapService: MapService,
                 private _modalService: ModalService) { }
 
     ngOnInit() {
+        this.flags = this._mapService.getRoute();
 
+        this._mapService.addSight().subscribe(sight => {
+            const sightIdx = this.flags.findIndex(item => item.id === sight.id);
+            if (sightIdx < 0) {
+                this.flags.push(sight);
+            }
+        });
     }
 
     onShowModal(flag: Flag) {

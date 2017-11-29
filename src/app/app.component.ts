@@ -34,4 +34,14 @@ export class AppComponent implements OnInit {
 
         this._mapService.setSight(this.modalSight);
     }
+
+    onAddToRoute() {
+        this.modalSight.isAddedToRoute = true;
+        this._mapService.addToRoute(this.modalSight);
+    }
+
+    onRemoveFromRoute() {
+        this.modalSight.isAddedToRoute = false;
+        this._mapService.removeFromRoute(this.modalSight);
+    }
 }

@@ -1,1 +1,6 @@
-<app-sights-list [flags]="flags" (scroll)="onScroll()" (setFlag)="setFlag($event)" (showModal)="onShowModal($event)"></app-sights-list>
+<div style="display: flex; flex-direction: column; height: 100%">
+    <div class="row" style="display: flex; justify-content: center">
+        <p class="text-info h3 text-center pt-3">Current route</p>
+    </div>
+    <app-sights-list [flags]="flags" (scroll)="onScroll()" (setFlag)="setFlag($event)" (showModal)="onShowModal($event)"></app-sights-list>
+</div>

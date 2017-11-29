@@ -9,11 +9,14 @@ const LIMIT = 10;
 
 @Injectable()
 export class MapService {
+    private route: Flag[] = [];
     private coordinates = new Subject<any>();
     private all = new Subject<Flag[]>();
     private init = new Subject<Flag[]>();
     private update = new Subject<Flag[]>();
     private favourite = new Subject<Flag>();
+    private addSightSubject = new Subject<Flag>();
+    private removeSightSubject = new Subject<Flag>();
     private southWest;
     private northEast;
 
@@ -76,5 +79,34 @@ export class MapService {
 
     selectSight(sight: Flag) {
         this.init.next([sight]);
+    }
+
+    getRoute() {
+        return this.route.slice();
+    }
+
+    addSight() {
+        return this.addSightSubject.asObservable();
+    }
+
+    addToRoute(sight: Flag) {
+        sight.isAddedToRoute = true;
+        this.route.push(sight);
+        FLAGS[FLAGS.findIndex(el => el.id === sight.id)] = sight;
+        this.addSightSubject.next(sight);
+        console.log(sight, this.route);
+    }
+
+    removeSight() {
+        return this.removeSightSubject.asObservable();
+    }
+
+    removeFromRoute(sight: Flag) {
+        sight.isAddedToRoute = false;
+        FLAGS[FLAGS.findIndex(el => el.id === sight.id)] = sight;
+        const sightIdx = this.route.findIndex(item => item.id === sight.id);
+        this.route.splice(sightIdx, 1);
+        this.removeSightSubject.next(sight);
+        console.log(this.route);
     }
 }

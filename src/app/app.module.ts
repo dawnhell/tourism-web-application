@@ -14,7 +14,6 @@ import { SightService } from './services/swagger/api/sight.service';
 import { RouteModule } from './pages/route/route.module';
 import { LeafletModule } from '@asymmetrik/angular2-leaflet';
 import { MapComponent } from './components/map/map.component';
-import { HelperService } from './services/helper.service';
 import { ModalService } from './services/modal.service';
 
 @NgModule({
@@ -41,7 +40,6 @@ import { ModalService } from './services/modal.service';
   ],
   providers: [
       MapService,
-      HelperService,
       ModalService,
       SightService,
       {

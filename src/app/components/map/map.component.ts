@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as L from 'leaflet';
 import { Flag } from '../../models/flag';
 import { MapService } from '../../services/map.service';
+import { LatLngExpression } from 'leaflet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -13,9 +15,12 @@ export class MapComponent implements OnInit {
     @Output() showAddBtn = new EventEmitter();
     private mymap: any;
     private flags: Flag[];
+    private route: Flag[] = [];
+    private polyline;
     isPopupSelected: boolean;
 
-    constructor(private _mapService: MapService) { }
+    constructor(private _mapService: MapService,
+                private router: Router) { }
 
     ngOnInit() {
         this.createAndDrawDefaultMap();
@@ -26,6 +31,32 @@ export class MapComponent implements OnInit {
         /* Initialization for the first time. */
         this._mapService.sendDefaultCoordinates();
         this._mapService.setBounds(this.mymap.getBounds()._southWest, this.mymap.getBounds()._northEast);
+
+        this.route = this._mapService.getRoute();
+
+        this._mapService.addSight().subscribe(sight => {
+            this.route.push(sight);
+            const lines = this.route.slice() as any[];
+            this.polyline.setLatLngs(lines.map(item => item = L.latLng(item.latitude, item.longitude)));
+            this.polyline.redraw();
+        });
+
+        this._mapService.removeSight().subscribe(sight => {
+            const sightIdx = this.route.findIndex(item => item.id === sight.id);
+            this.route.splice(sightIdx, 1);
+            const lines = this.route.slice() as any[];
+            this.polyline.setLatLngs(lines.map(item => item = L.latLng(item.latitude, item.longitude)));
+            this.polyline.redraw();
+        });
+
+        // const latlngs = [
+        //     [45.51, -122.68],
+        //     [37.77, -122.43],
+        //     [34.04, -118.2]
+        // ] as LatLngExpression[];
+        this.polyline = L.polyline([], {color: 'red'}).addTo(this.mymap);
+
+        // this.mymap.fitBounds(this.polyline.getBounds());
     }
 
     createAndDrawDefaultMap() {
@@ -40,11 +71,16 @@ export class MapComponent implements OnInit {
 
     bindMapEvents() {
         this.mymap.on('zoomend', () => {
-            this._mapService.setBounds(this.mymap.getBounds()._southWest, this.mymap.getBounds()._northEast);
+            if (!this.isPopupSelected) {
+                this._mapService.setBounds(this.mymap.getBounds()._southWest, this.mymap.getBounds()._northEast);
+            }
         });
 
         this.mymap.on('moveend', () => {
-            this._mapService.setBounds(this.mymap.getBounds()._southWest, this.mymap.getBounds()._northEast);
+            console.log(this.isPopupSelected);
+            if (!this.isPopupSelected) {
+                this._mapService.setBounds(this.mymap.getBounds()._southWest, this.mymap.getBounds()._northEast);
+            }
         });
     }
 
@@ -69,9 +105,14 @@ export class MapComponent implements OnInit {
 
             const marker = L.marker([this.flags[i].latitude, this.flags[i].longitude], { icon: icon })
                 .addTo(this.mymap)
-                .on('click', () => {
+                .on('popupopen', () => {
                     this._mapService.selectSight(this.flags[i]);
                     this.isPopupSelected = true;
+                    this.router.navigate(['/home']);
+                })
+                .on('popupclose', () => {
+                    this.reinitList();
+                    this.isPopupSelected = false;
                 });
 
             /* This is HTML markup for marker popup. */

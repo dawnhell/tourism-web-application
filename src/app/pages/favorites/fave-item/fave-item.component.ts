@@ -10,12 +10,14 @@ export class FaveItemComponent {
     @Input() sight: Flag;
     @Output() showModal = new EventEmitter();
     @Output() setFlag = new EventEmitter();
+    @Output() addToRoute = new EventEmitter();
+    @Output() removeFromRoute = new EventEmitter();
 
     constructor() { }
 
     onCardClick(event) {
         if ([].includes.call(event.target.classList, 'btn')) {
-            // add to route
+            this.sight.isAddedToRoute ? this.onRemoveFromRoute() : this.onAddToRoute()
         } else if ([].includes.call(event.target.classList, 'fa-heart')) {
             this.onSetFlag();
         } else {
@@ -35,5 +37,15 @@ export class FaveItemComponent {
         }
 
         this.setFlag.emit(this.sight);
+    }
+
+    onAddToRoute() {
+        this.sight.isAddedToRoute = true;
+        this.addToRoute.emit(this.sight);
+    }
+
+    onRemoveFromRoute() {
+        this.sight.isAddedToRoute = false;
+        this.removeFromRoute.emit(this.sight);
     }
 }

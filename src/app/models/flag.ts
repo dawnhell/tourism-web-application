@@ -7,5 +7,6 @@ export class Flag {
     latitude: number;
     longitude: number;
     isFavourite: boolean;
+    isAddedToRoute: boolean;
     favedAt: Date;
 }

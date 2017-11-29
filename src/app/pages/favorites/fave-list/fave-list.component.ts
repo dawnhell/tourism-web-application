@@ -70,4 +70,12 @@ export class FaveListComponent implements OnInit {
     onSetFlag(flag: Flag) {
         this.setFlag.emit(flag);
     }
+
+    onAddToRoute(flag: Flag) {
+        this._mapService.addToRoute(flag);
+    }
+
+    onRemoveFromRoute(flag: Flag) {
+        this._mapService.removeFromRoute(flag);
+    }
 }
